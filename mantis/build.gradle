@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.novoda.bintray-release'
+//publish command
+//gradlew clean build bintrayUpload -PbintrayUser=donny8chen -PbintrayKey=e5ea7e776c64b2573962c43753aeb3b138c128f2 -PdryRun=false
+//e5ea7e776c64b2573962c43753aeb3b138c128f2
+
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    publish {
+        userOrg = 'donny8chen' // bintray用户名
+        repoName = 'android_base' // bintray仓库名
+        groupId = 'com.donnychen' // 决定最后依赖的路径
+        artifactId = 'mantis' // 决定最后依赖的名称
+        publishVersion = '0.0.1' // 决定最后依赖的版本号
+        desc = 'this is The Android Project Base'
+        website = 'https://github.com/donny8chen'
+        dryRun = false // true-仅运行  false-运行+上传
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

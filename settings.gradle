@@ -1,0 +1,3 @@
+rootProject.name='AndroidProjectBase'
+include ':app'
+include ':mantis'
